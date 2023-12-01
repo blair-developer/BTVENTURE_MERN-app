@@ -3,14 +3,15 @@ import { useState } from "react";
 import {Link, useNavigate } from 'react-router-dom';
 
 export default function SignUp() {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({}); //store
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  //function for event handlers
   const handleChange = (e) => {
-    setFormData({
+    setFormData({  //updating component state
       ...formData,
-      [e.target.id]: e.target.value,
+      [e.target.id]: e.target.value, //sets whatever changinging to its value
     });
     console.log(formData);
   };

@@ -1,10 +1,11 @@
-import express from "express";
+import express from "express"; //backend app
 import mongoose from "mongoose";
-import dotenv from 'dotenv';
+import dotenv from 'dotenv'; //environment variable
 import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
 dotenv.config();
 
+//mongodb connection to api server
 mongoose
 .connect(process.env.MONGO)
     .then(()=>{
@@ -14,7 +15,7 @@ mongoose
     console.log(err);
 });
 
-const app = express();
+const app = express(); //innitialisation
 
 app.use(express.json());  //allows json as input fromm API
 
