@@ -3,6 +3,7 @@ import bcryptjs from "bcryptjs";
 import { errorHandler } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 
+//api route for signup
 export const signup = async (req, res, next) =>{
     const {username, email, password} = req.body; //get information from request body to save insode database
     const hashedPassword = bcryptjs.hashSync(password, 10); // encrypt password in database, 10 is just a salt number
