@@ -7,7 +7,7 @@ export default function SignUp() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  //function for event handlers
+  //function for event handlers for input changes in a form.
   const handleChange = (e) => {
     setFormData({  //updating component state
       ...formData,
