@@ -18,7 +18,6 @@ export default function SignIn() {
     console.log(formData);
   };
   const handleSubmit = async (e) =>{
-    setLoading(true);
     e.preventDefault(); //prevent refresh page
     try {
       dispatch(signInStart());
@@ -35,7 +34,6 @@ export default function SignIn() {
       if (data.success === false) {
         dispatch(signinFailure(data.message));
         return;
-       console.log(data); 
       }
       dispatch(signInSuccess(data));
       navigate('/');
