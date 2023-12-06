@@ -9,7 +9,7 @@ export default function Contactus() {
           <input type='email' placeholder='Enter Your Email' className='border p-2 rounded-lg' />
           <input type='text' placeholder='Enter your email' className='border p-2 rounded-lg' />
           <textarea className=''>
-             
+              enter any text
           </textarea>
        </form>
     </div>
