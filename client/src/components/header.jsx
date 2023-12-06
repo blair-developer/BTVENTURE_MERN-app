@@ -26,6 +26,9 @@ export default function Header() {
             <Link to='/about'>
             <li className='hidden sm:inline text-green-500 hover:text-purple-400 cursor-pointer'>About</li>
             </Link>
+            <Link to='/contactus'>
+            <li className='hidden sm:inline text-green-500 hover:text-purple-400 cursor-pointer'>Contact Us</li>
+            </Link>
             <Link to='/profile'>
             {currentUser ? (
               <img className='rounded-full h-7 w-7 object-cover' src={currentUser.avatar} alt='profile' />
