@@ -3,11 +3,8 @@ import { useSelector } from 'react-redux';
 import { useRef } from "react";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import { app } from '../firebase';
-<<<<<<< HEAD
 import { updateUserStart, updateUserSuccess, updateUserFailure } from '../redux/user/userSlice';
-=======
 import { updateUserStart, updateUserSuccess, updateUserFailure,deleteUserStart,deleteUserSuccess,deleteUserFailure } from '../redux/user/userSlice';
->>>>>>> 6c7f958 (add delete user functionality)
 import { useDispatch } from "react-redux";
 
 export default function Profile() {
@@ -83,8 +80,7 @@ const handleFileUpload = (file) => {
    }
  };
 
-<<<<<<< HEAD
-=======
+
  const handleDeleteUser = async () => {
    try {
      dispatch(deleteUserStart());
@@ -116,8 +112,6 @@ const handleFileUpload = (file) => {
      dispatch(deleteUserFailure(data.message));
    }
  };
-
->>>>>>> 6c7f958 (add delete user functionality)
   return (
     <div className='p-3 max-w-lg mx-auto'>
        <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
