@@ -22,7 +22,7 @@ export default function Profile() {
       request.resource.contentType.matches('images/.*');
   */
 useEffect(() => {
-   if (file) {
+   if(file) {
       handleFileUpload(file);
    }
 }, [file]);
