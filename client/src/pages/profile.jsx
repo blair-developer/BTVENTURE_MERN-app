@@ -6,6 +6,7 @@ import { app } from '../firebase';
 import { updateUserStart, updateUserSuccess, updateUserFailure,deleteUserStart,deleteUserSuccess,deleteUserFailure } from '../redux/user/userSlice';
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+
 export default function Profile() {
   const fileref = useRef(null)
   const {currentUser, loading, error} = useSelector((state) => state.user);
@@ -14,13 +15,21 @@ export default function Profile() {
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [showListingsError, setShowListingsError] = useState(false);
+  const [userListings, setUserListings] = useState([]);
   const dispatch = useDispatch();
+
+
   /* firebase storage:
    allow read,
       allow write: if
       request.resource.size < 2 * 1024 * 1024 &&
       request.resource.contentType.matches('images/.*');
   */
+ 
+
+
+
 useEffect(() => {
    if(file) {
       handleFileUpload(file);
@@ -111,6 +120,23 @@ const handleFileUpload = (file) => {
      dispatch(deleteUserFailure(error.message));
    }
  };
+
+ const handleShowListings = async () => {
+   try {
+     setShowListingsError(false);
+     const res = await fetch(`/api/user/listings/${currentUser._id}`);
+     const data = await res.json();
+     if (data.success === false) {
+       setShowListingsError(true);
+       return;
+     }
+
+     setUserListings(data);
+   } catch (error) {
+     setShowListingsError(true);
+   }
+ };
+
   return (
     <div className='p-3 max-w-lg mx-auto'>
        <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
@@ -146,6 +172,41 @@ const handleFileUpload = (file) => {
        </div>
         <p className='text-red-700 mt-5'>{error ? error : ''}</p>
         <p className='text-green-700 mt-5'>{updateSuccess ? 'User Successfully updated' : ''}</p>
+        <button onClick={handleShowListings} className='text-green-700 w-full'>
+            Show Listings
+        </button>
+        <p className='text-red-700 mt-5'>
+           {showListingsError ? 'Error showing lists' : ''}
+        </p>
+        {userListings && userListings.length > 0 && (
+         <div className='flex flex-col gap-4'>
+            <h1 className='text-center mt-7 text-2xl font-semibold'>
+                Your Listings
+            </h1>
+           {userListings.map((listing) => (
+           <div key={listing._id} className='border rounded-lg p-3 flex justify-between items-center gap-4'>
+            <Link to={`/listing/${listing._id}`}>{listing.title}
+              <img src={listing.imageUrls[0]}
+                alt='listing cover'
+                className='h-16 w-16 object-contain'
+              />
+            </Link>
+            <Link className='text-slate-700 font-semibold flex-1 hover:underline truncate' to={`/listing/${listing._id}`}>
+              <p>{listing.name}
+              </p>
+            </Link>
+          <div className='flex flex-column items-center gap-3'>
+            <button className='text-red-700 uppercase'>
+                Delete
+            </button>
+            <button className='text-green-700 uppercase'>
+                Edit
+            </button>
+            </div>
+          </div>
+           ))}
+          </div>
+          )}
     </div>
   )
 };
