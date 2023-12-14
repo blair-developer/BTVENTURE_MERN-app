@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from 'dotenv'; //environment variable
 import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
+import subnextRouter from './routes/subnext.route.js';
 import listingRouter from './routes/listing.route.js';
 import cookieParser from "cookie-parser";
 import path from 'path';
@@ -32,6 +33,7 @@ app.listen(3000, () =>{
 
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/subnext", subnextRouter);
 app.use("/api/listing", listingRouter); 
 
 

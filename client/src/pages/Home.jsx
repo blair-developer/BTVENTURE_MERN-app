@@ -5,6 +5,7 @@ import { Navigation } from 'swiper/modules';
 import SwiperCore from 'swiper';
 import 'swiper/css/bundle';
 import ListingItem from '../components/ListingItem';
+import { Services } from '../components/services';
 
 export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
@@ -79,12 +80,14 @@ export default function Home() {
                   background: `url(${listing.imageUrls[0]}) center no-repeat`,
                   backgroundSize: 'cover',
                 }}
-                className='h-[450px]'
+                className='h-[450px] m-3'
                 key={listing._id}
               ></div>
             </SwiperSlide>
           ))}
       </Swiper>
+       {/* services section */}
+       <Services />
 
       {/* listing results for offer, sale and rent */}
 
@@ -129,6 +132,7 @@ export default function Home() {
           </div>
         )}
       </div>
+      
     </div>
   );
 }

@@ -5,18 +5,17 @@ import jwt from "jsonwebtoken";
 
 //api route for signup
 export const signup = async (req, res, next) =>{
-    const {username, email, password} = req.body; //get information from request body to save insode database
+    const {username, email, password} = req.body; //get information from request body to save inside database
     const hashedPassword = bcryptjs.hashSync(password, 10); // encrypt password in database, 10 is just a salt number
     const newUser = new User({username, email, password: hashedPassword}); //save into database
-    //use try,catch to uouput an error
+    //use try,catch to output an error
     try {
         await newUser.save(); //save in database
         res.status(201).json('User created successfully'); 
     } catch (error) {
        next(error);
-    }
-    
-};;
+    }   
+};
 //api route for signin
 export const signin = async (req, res, next) =>{
    const{email,password} = req.body;
@@ -32,6 +31,7 @@ export const signin = async (req, res, next) =>{
      next(error);
    }
 }
+
 //for google api route
 export const google = async(req, res, next) => {
   try {
@@ -65,3 +65,4 @@ export const signOut = async (req, res, next) => {
     next(error);
   }
 }; 
+
